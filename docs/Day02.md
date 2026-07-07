@@ -256,9 +256,16 @@ A scheduled Task executes a MERGE statement that synchronizes the reporting tabl
 
 This approach minimizes compute costs while ensuring that downstream systems always have the latest data.
 
-# Published on LinkedIn
+---
 
-LinkedIn Post : https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-clouddataengineering-share-7478096078609760256-49RT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
+## 📢 LinkedIn Learning Journal
+
+I have also documented the key learnings from this day's implementation on LinkedIn as part of my #ProjectPhoenix learning journey.
+
+🔗 **LinkedIn Post:**  
+https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-clouddataengineering-share-7478096078609760256-49RT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
+
+The LinkedIn post provides a concise summary of the day's accomplishments, while this GitHub documentation includes the complete implementation details, technical explanations, and lessons learned.
 
 ---
 
