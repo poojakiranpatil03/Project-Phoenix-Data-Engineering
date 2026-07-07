@@ -1,26 +1,249 @@
-🐦‍🔥 Project Phoenix | Day 2
-🚀 Building an End-to-End Snowflake Data Warehouse
+# 🐦‍🔥 Project Phoenix
 
-Today's focus was on building production-ready data ingestion by understanding how Snowflake handles data quality, Change Data Capture (CDC), and pipeline automation.
+# Day 2 - Implementing Change Data Capture (CDC) using Streams, MERGE & Tasks
 
-In today's session I implemented:
- ✅ Explored COPY INTO error handling strategies
- ✅ Validated files before loading using VALIDATION_MODE
- ✅ Tested ON_ERROR = ABORT_STATEMENT, CONTINUE and SKIP_FILE
- ✅ Understood when to reject an entire file versus loading valid records
- ✅ Built CDC using Streams
- ✅ Performed INSERT, UPDATE and DELETE operations to observe change tracking
- ✅ Explored METADATA$ACTION and METADATA$ISUPDATE
- ✅ Understood why an UPDATE is represented as a DELETE + INSERT
- ✅ Built incremental loading using MERGE
- ✅ Automated the CDC pipeline using Tasks
- ✅ Learned how SYSTEM$STREAM_HAS_DATA() helps avoid unnecessary task execution
+---
 
-💡 One interesting learning:
-Snowflake Streams don't store a duplicate copy of changed data. Instead, they track changes made to the base table and expose only the incremental records required for downstream processing.
-Another valuable takeaway was understanding that production data pipelines aren't just about loading data—they're about handling failures gracefully. Choosing between ABORT_STATEMENT, CONTINUE, or SKIP_FILE depends on business requirements and data quality expectations.
-I'm really enjoying seeing how Snowflake simplifies traditional ETL concepts like CDC by combining Streams, Tasks, and MERGE into an efficient incremental processing framework.
+# Objective
 
-Next up: Snowpipe, Dynamic Tables, dbt, and building an enterprise-grade data engineering project.
+The objective of Day 2 was to transform our manual data loading process into an incremental data pipeline by implementing Change Data Capture (CDC).
+
+Instead of processing the entire dataset every time, we explored how Snowflake captures only the changed records and applies them efficiently to downstream tables.
+
+By the end of this session, we successfully implemented Streams, MERGE, and Tasks to build an automated incremental loading process.
+
+---
+
+# Concepts Covered
+
+- Change Data Capture (CDC)
+- Streams
+- METADATA Columns
+- MERGE
+- Tasks
+- Incremental Loading
+- Pipeline Automation
+
+---
+
+# Why is this needed?
+
+Reloading an entire dataset every day is inefficient and expensive.
+
+Modern data engineering focuses on processing only the data that has changed since the previous execution.
+
+Snowflake Streams make this possible by tracking table changes without duplicating the underlying data.
+
+Combined with MERGE and Tasks, they provide a simple yet powerful mechanism for building incremental data pipelines.
+
+---
+
+# Architecture
+
+```
+
+Source Table
+│
+▼
+Snowflake Stream
+│
+▼
+MERGE Statement
+│
+▼
+Target Table
+│
+▼
+Snowflake Task
+
+```
+
+---
+
+# Snowflake Objects Created
+
+| Object | Purpose |
+|---------|----------|
+| Stream | Tracks INSERT, UPDATE and DELETE operations |
+| Target Table | Stores processed records |
+| MERGE Statement | Performs incremental updates |
+| Task | Automates pipeline execution |
+
+---
+
+# Step-by-Step Implementation
+
+## Step 1
+
+Created a Stream on the RAW table.
+
+Purpose:
+
+Track all changes occurring in the source table.
+
+---
+
+## Step 2
+
+Performed INSERT operations.
+
+Observed:
+
+Streams captured newly inserted rows.
+
+---
+
+## Step 3
+
+Performed UPDATE operations.
+
+Observed:
+
+An UPDATE operation generated two records inside the Stream:
+
+- DELETE
+- INSERT
+
+This represents the old version and the new version of the row.
+
+---
+
+## Step 4
+
+Performed DELETE operations.
+
+Observed:
+
+Deleted rows appeared inside the Stream with the appropriate metadata.
+
+---
+
+## Step 5
+
+Explored Stream Metadata Columns.
+
+The following metadata columns were used:
+
+- METADATA$ACTION
+- METADATA$ISUPDATE
+
+These columns help identify the type of change captured by the Stream.
+
+---
+
+## Step 6
+
+Created a MERGE statement.
+
+Purpose:
+
+Synchronize the target table using only incremental changes captured by the Stream.
+
+---
+
+## Step 7
+
+Created a Task.
+
+Purpose:
+
+Automate execution of the MERGE process.
+
+Instead of manually executing SQL, Snowflake Tasks schedule and execute pipelines automatically.
+
+---
+
+# Verification
+
+Validated that:
+
+✅ INSERT operations reached the target table
+
+✅ UPDATE operations correctly modified existing rows
+
+✅ DELETE operations removed the corresponding records
+
+✅ MERGE processed only incremental changes
+
+✅ Tasks executed successfully
+
+---
+
+# Key Learnings
+
+One of the biggest learnings was understanding that Snowflake Streams do not store another copy of the changed data.
+
+Instead, they maintain a change log on the source table and expose only the incremental records required for downstream processing.
+
+Another important observation was that an UPDATE operation is internally represented as a DELETE followed by an INSERT.
+
+Understanding this behavior is essential while building production-grade CDC pipelines.
+
+---
+
+# Best Practices
+
+- Create Streams only on source tables that require change tracking.
+- Consume Streams regularly to avoid unnecessary backlog.
+- Use MERGE instead of DELETE + INSERT logic.
+- Automate pipelines using Tasks.
+- Validate metadata columns before implementing business logic.
+
+---
+
+# Production Considerations
+
+In enterprise environments:
+
+- Streams are commonly used for incremental ETL pipelines.
+- MERGE operations synchronize dimension and fact tables.
+- Tasks orchestrate automated data processing.
+- CDC significantly reduces processing time and compute cost compared to full reloads.
+
+---
+
+# Interview Questions
+
+### What is Change Data Capture (CDC)?
+
+### How do Snowflake Streams work?
+
+### Why doesn't a Stream duplicate the source table?
+
+### Why is an UPDATE represented as DELETE + INSERT?
+
+### What is the purpose of METADATA$ACTION?
+
+### What is METADATA$ISUPDATE?
+
+### When would you use MERGE instead of INSERT?
+
+### How do Snowflake Tasks automate pipelines?
+
+### What happens after a Stream is consumed?
+
+### What are the advantages of incremental loading?
+
+---
+
+# Summary
+
+Day 2 introduced one of the most important concepts in modern data engineering—Change Data Capture.
+
+Using Streams, MERGE, and Tasks, we transformed a manual data loading process into an automated incremental pipeline capable of efficiently processing only changed data.
+
+This significantly improves scalability, reduces compute costs, and forms the foundation for production-grade ETL architectures.
+
+---
+
+# Beyond the Implementation
+
+Implementing CDC is not just about capturing data changes—it is about designing pipelines that scale efficiently as data volumes grow.
+
+By processing only incremental changes instead of full datasets, organizations reduce compute costs, improve processing times, and enable near real-time analytics.
+
+Snowflake's combination of Streams, MERGE, and Tasks provides a simple yet powerful framework for building reliable and maintainable cloud-native data pipelines.
+
+#Published on LinkedIn
 
 LinkedIn Post : https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-clouddataengineering-share-7478096078609760256-49RT/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
