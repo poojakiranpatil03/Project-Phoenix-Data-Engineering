@@ -184,3 +184,11 @@ This foundation will be extended in the upcoming sessions by introducing Change 
 # Published on LinkedIn : 
 
 LinkedIn Post : https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-sql-share-7477791234292436995-ZhZW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
+
+---
+
+## Author's Note
+
+Project Phoenix is a hands-on learning initiative where I am designing and building an end-to-end cloud data engineering platform using Snowflake, AWS, and modern data engineering tools.
+
+This repository documents not only the final implementation but also the architecture decisions, troubleshooting journey, best practices, and key learnings gained throughout the project. The objective is to build a practical portfolio while developing a deeper understanding of production-ready data engineering concepts.
