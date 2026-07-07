@@ -165,12 +165,32 @@ Estimated Monthly Cost
 
 Although AWS costs remain minimal, Snowflake compute consumption should also be considered.
 
-### Warehouse
+# Snowflake Warehouse Configuration
 
-| Warehouse | RETAIL_WH | 
-| Warehouse Size | X-Small |
-| Auto Suspend | 60 Seconds |
-| Auto Resume | Enabled |
+Project Phoenix uses a dedicated virtual warehouse to execute all SQL queries and data loading operations.
+
+| Property | Configuration | Purpose |
+|----------|---------------|---------|
+| Warehouse Name | `RETAIL_WH` | Dedicated compute warehouse for Project Phoenix |
+| Warehouse Size | `X-SMALL` | Suitable for learning workloads while minimizing compute costs |
+| Auto Suspend | `60 Seconds` | Automatically suspends the warehouse after 60 seconds of inactivity to reduce costs |
+| Auto Resume | `Enabled` | Automatically resumes the warehouse whenever a query is executed |
+| Initially Suspended | `TRUE` | Prevents unnecessary compute consumption when the warehouse is created |
+| Scaling Policy | `Standard` | Default scaling policy suitable for the project's workload |
+| Auto Scaling | Not Configured | A single-cluster warehouse is sufficient for this learning project |
+
+---
+
+## Why This Configuration?
+
+The warehouse has been intentionally configured to optimize cost while maintaining good performance.
+
+### Benefits
+
+- ✅ Minimizes compute charges by suspending automatically after inactivity.
+- ✅ Eliminates the need for manual warehouse management through Auto Resume.
+- ✅ X-Small warehouse provides sufficient compute power for learning and development workloads.
+- ✅ A dedicated warehouse isolates project execution from other Snowflake workloads.
 
 These settings minimize compute costs by ensuring that the warehouse runs only when required.
 
