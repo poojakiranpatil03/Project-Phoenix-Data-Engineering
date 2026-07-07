@@ -194,6 +194,16 @@ The warehouse has been intentionally configured to optimize cost while maintaini
 
 These settings minimize compute costs by ensuring that the warehouse runs only when required.
 
+# Design Decision
+
+### Why was an X-Small Warehouse selected?
+
+Project Phoenix is designed as a hands-on learning platform that processes relatively small CSV datasets. An X-Small warehouse provides sufficient compute capacity for development and testing while keeping compute costs low.
+
+As the project evolves to process larger datasets or support concurrent workloads, the warehouse size can be increased without requiring changes to the underlying data pipeline. This demonstrates one of Snowflake's key advantages—independent scaling of compute and storage.
+
+---
+
 ### Snowpipe
 
 Snowpipe is a serverless service.
