@@ -167,10 +167,10 @@ Although AWS costs remain minimal, Snowflake compute consumption should also be 
 
 ### Warehouse
 
-Warehouse | RETAIL_WH
-Warehouse Size | X-Small
-Auto Suspend | 60 Seconds
-Auto Resume | Enabled
+| Warehouse | RETAIL_WH | 
+| Warehouse Size | X-Small |
+| Auto Suspend | 60 Seconds |
+| Auto Resume | Enabled |
 
 These settings minimize compute costs by ensuring that the warehouse runs only when required.
 
@@ -237,7 +237,7 @@ By combining:
 - Snowpipe
 - Auto Suspend Warehouses
 
-it is possible to design a scalable, event-driven architecture while keeping operational costs minimal.
+It is possible to design a scalable, event-driven architecture while keeping operational costs minimal.
 
 Understanding cloud pricing is just as important as understanding cloud architecture, as cost optimization is a key responsibility of modern data engineers and cloud architects.
 
