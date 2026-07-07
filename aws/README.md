@@ -1,16 +1,31 @@
-# AWS Components
+# AWS Infrastructure
 
-This folder contains all AWS resources used in Project Phoenix.
+This folder documents all AWS resources used in Project Phoenix.
 
-Current Services
+The goal of this implementation is to build a production-inspired, event-driven data ingestion pipeline using Amazon Web Services and Snowflake.
+
+## AWS Services Used
 
 - Amazon S3
 - Amazon SNS
 - Amazon SQS
-- IAM Roles
-- IAM Policies
+- IAM
+- Event Notifications
 
-Future Services
+## High-Level Architecture
 
-- AWS Glue
-- CloudWatch
+Amazon S3
+        │
+        ▼
+Amazon SNS
+        │
+        ▼
+Snowflake Managed SQS
+        │
+        ▼
+Snowpipe
+        │
+        ▼
+RAW Layer
+
+Each subfolder contains the implementation details, configuration steps, and best practices for the respective AWS service.
