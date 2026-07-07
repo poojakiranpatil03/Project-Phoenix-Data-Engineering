@@ -181,9 +181,16 @@ We created the core Snowflake objects required for data ingestion and learned ho
 
 This foundation will be extended in the upcoming sessions by introducing Change Data Capture (CDC), Streams, Tasks, and cloud-native data ingestion using AWS.
 
-# Published on LinkedIn : 
+---
 
-LinkedIn Post : https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-sql-share-7477791234292436995-ZhZW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
+## 📢 LinkedIn Learning Journal
+
+I have also documented the key learnings from this day's implementation on LinkedIn as part of my #ProjectPhoenix learning journey.
+
+🔗 **LinkedIn Post:**  
+https://www.linkedin.com/posts/pooja-kiran-patil_snowflake-dataengineering-sql-share-7477791234292436995-ZhZW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABUJavwBn3om7yVOtaEYFJ4p6BIlwfwZ2Mc
+
+The LinkedIn post provides a concise summary of the day's accomplishments, while this GitHub documentation includes the complete implementation details, technical explanations, and lessons learned.
 
 ---
 
