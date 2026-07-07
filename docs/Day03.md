@@ -182,6 +182,15 @@ PROJECT_PHOENIX.RAW.SALES_RAW
 ```
 
 ---
+# Commands Executed During This Session
+
+The SQL scripts used during this session are available in:
+
+- `snowflake/storage_integrations/`
+- `snowflake/stages/`
+- `snowflake/file_formats/`
+- `snowflake/pipes/`
+---
 
 # Key Learnings
 
