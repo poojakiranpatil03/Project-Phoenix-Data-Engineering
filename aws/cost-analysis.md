@@ -167,19 +167,10 @@ Although AWS costs remain minimal, Snowflake compute consumption should also be 
 
 ### Warehouse
 
-RETAIL_WH
-
-Warehouse Size
-
-X-Small
-
-Auto Suspend
-
-60 Seconds
-
-Auto Resume
-
-Enabled
+Warehouse | RETAIL_WH
+Warehouse Size | X-Small
+Auto Suspend | 60 Seconds
+Auto Resume | Enabled
 
 These settings minimize compute costs by ensuring that the warehouse runs only when required.
 
