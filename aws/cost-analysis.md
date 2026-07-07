@@ -227,6 +227,18 @@ Project Phoenix follows several cloud cost optimization best practices:
 
 ✅ Monitor Snowflake usage regularly
 
+# Snowflake Cost Summary
+
+| Component | Configuration | Cost Optimization |
+|-----------|---------------|-------------------|
+| Warehouse | `RETAIL_WH` | Dedicated warehouse for the project |
+| Warehouse Size | `X-SMALL` | Lowest compute tier suitable for development |
+| Compute Billing | Pay only while the warehouse is running | Auto Suspend reduces idle costs |
+| Auto Suspend | 60 Seconds | Prevents unnecessary compute usage |
+| Auto Resume | Enabled | Starts automatically only when required |
+| Snowpipe | Serverless | Charges are based on files processed rather than warehouse uptime |
+| Storage | Compressed Snowflake Storage | Small datasets keep storage costs minimal |
+
 ---
 
 # Estimated Monthly Cost
