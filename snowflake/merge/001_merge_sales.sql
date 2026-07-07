@@ -1,0 +1,54 @@
+/*
+===============================================================================
+Project     : Project Phoenix
+Author      : Pooja Kiran Patil
+Description : Incrementally merge records from Stream into target table.
+===============================================================================
+*/
+
+USE WAREHOUSE RETAIL_WH;
+USE DATABASE PROJECT_PHOENIX;
+
+MERGE INTO SILVER.SALES T
+USING RAW.SALES_RAW_STREAM S
+
+ON T.SALE_ID = S.SALE_ID
+
+WHEN MATCHED
+AND METADATA$ACTION='INSERT'
+THEN UPDATE SET
+
+SALE_DATE = S.SALE_DATE,
+STORE_ID = S.STORE_ID,
+PRODUCT_ID = S.PRODUCT_ID,
+CUSTOMER_ID = S.CUSTOMER_ID,
+QUANTITY = S.QUANTITY,
+UNIT_PRICE = S.UNIT_PRICE,
+TOTAL_AMOUNT = S.TOTAL_AMOUNT
+
+WHEN NOT MATCHED
+AND METADATA$ACTION='INSERT'
+
+THEN INSERT
+(
+SALE_ID,
+SALE_DATE,
+STORE_ID,
+PRODUCT_ID,
+CUSTOMER_ID,
+QUANTITY,
+UNIT_PRICE,
+TOTAL_AMOUNT
+)
+
+VALUES
+(
+S.SALE_ID,
+S.SALE_DATE,
+S.STORE_ID,
+S.PRODUCT_ID,
+S.CUSTOMER_ID,
+S.QUANTITY,
+S.UNIT_PRICE,
+S.TOTAL_AMOUNT
+);
